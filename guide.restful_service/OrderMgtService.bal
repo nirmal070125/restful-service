@@ -40,7 +40,7 @@ service<http> OrderMgtService {
         path:"/order"
     }
     resource addOrder (http:Connection conn, http:InRequest req) {
-        json orderReq = req.getJsonPayload();
+        var orderReq, _ = req.getJsonPayload();
         var orderId, _ = (string) orderReq.Order.ID;
         ordersMap[orderId] = orderReq;
 
@@ -65,7 +65,7 @@ service<http> OrderMgtService {
     }
     resource updateOrder (http:Connection conn, http:InRequest req, string orderId) {
 
-        json updatedOrder = req.getJsonPayload();
+        var updatedOrder, _ = req.getJsonPayload();
         json existingOrder;
 
         // Find the order that needs to be updated from the map and retrieve it in JSON format.
