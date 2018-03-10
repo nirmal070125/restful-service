@@ -14,22 +14,6 @@ function init() {
     orderMgtServiceClient = create http:HttpClient(orderMgtServiceUrl, {});
 }
 
-function addOrder (json reqJson) (json resJson, error e) {
-    endpoint<http:HttpClient> httpEndpoint {
-        orderMgtServiceClient;
-    }
-    http:OutRequest req = {};
-    http:InResponse resp = {};
-    req.setJsonPayload(reqJson);
-    resp, e = httpEndpoint.post("/order", req);
-    if (e != null) {
-        resJson, e = resp.getJsonPayload();
-    } else {
-        resJson = null;
-    }
-    return resJson, e;
-}
-
 function addOrderDataProvider () (json[][]) {
     json[][] data = [[{"Order":{"ID":"100500", "Name":"XYZ", "Description":"Sample order."}}, {"status":"Order Created.",
                                                                                                   "orderId":"100500"}],
